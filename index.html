@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Box con README.md (formattato)</title>
+  <style>
+    .readme-box {
+      border: 1px solid #ccc;
+      padding: 20px;
+      background: #fafafa;
+      max-width: 700px;
+      margin: 40px auto;
+      font-family: sans-serif;
+      overflow-x: auto;
+    }
+    /* Un po' di stile per il Markdown */
+    .readme-box h1, .readme-box h2, .readme-box h3 { margin-top: 1.2em; }
+    .readme-box code, .readme-box pre { background: #eee; }
+  </style>
+</head>
+<body>
+  <div id="readme" class="readme-box">Caricamento...</div>
+  <!-- Libreria Marked.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    // Sostituisci l’URL qui sotto con quello RAW del tuo README.md
+    const readmeUrl = 'https://raw.githubusercontent.com/[OWNER]/[REPO]/main/README.md';
+
+    fetch(readmeUrl)
+      .then(response => response.text())
+      .then(md => {
+        document.getElementById('readme').innerHTML = marked.parse(md);
+      })
+      .catch(() => {
+        document.getElementById('readme').textContent = 'Impossibile caricare il README.md';
+      });
+  </script>
+</body>
+</html>
